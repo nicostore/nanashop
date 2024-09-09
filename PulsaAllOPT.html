@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kembali</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+        :root {
+            --main: #fff;
+            --subMain: #6495ED;
+            --subColor: #08e900;
+            --bgIn: #636363;
+            --white: #ffffff;
+            --tabs: #4e4e4e;
+            --borderColor: #f2f3f4;
+            --animate-duration: 800ms;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--main);
+            user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            padding: 0;
+            margin: 0;
+            animation: fade-in 2s linear;
+        }
+
+        .shadows {
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        }
+
+        .mood2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mood1 {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #dc0f0f;
+            color: white;
+        }
+
+        .toast-header {
+            background: red;
+        }
+
+        .toast {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+        #inputNumber {
+            background: transparent;
+            border: 2px solid var(--borderColor);
+            outline: none;
+            font-size: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: none;
+
+            color: black;
+            width: 100%;
+        }
+
+        #inputNumber:hover,
+        #inputNumber:focus {
+            box-shadow: none;
+            background: transparent;
+            border: 2px solid var(--subMain);
+            color: black;
+        }
+
+        label {
+            color: var(--subMain);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        i {
+            font-size: 12px;
+        }
+
+
+        .btn-no,
+        .btn-no:focus {
+            background: var(--subMain);
+            border: none;
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .btn-yes,
+        .btn-yes:focus {
+            background: var(--subColor);
+            border: none;
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+        }
+
+
+        .modal.fade .modal-dialog.modal-dialog-scrollable {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            width: 100%;
+            height: auto !important;
+            transform: translate(0, 100%);
+            transition: transform 0.3s ease-out;
+            border-radius: 0;
+            /* Menghilangkan border-radius bawaan Bootstrap pada elemen modal */
+        }
+
+        .modal-content {
+            border: 0px solid #ccc;
+            background-color: white;
+        }
+
+        .modal-header {
+            background-color: var(--subMain);
+            border: none;
+
+            padding: 10px !important;
+        }
+
+        .modal-header h5 {
+            color: white !important;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .modal.show .modal-dialog.modal-dialog-scrollable {
+            transform: translate(0, 0);
+        }
+
+        tr {
+            border-bottom: 2px solid #f1f1f1;
+        }
+
+
+        /* Tambahkan ke bagian CSS Anda */
+
+        .modal-body .table {
+            border: none;
+            /* Menghilangkan garis tabel */
+        }
+
+        .modal-body .table tbody tr td {
+            border: none;
+            color: black;
+            font-size: 13px;
+        }
+
+        .modal-body .table tbody tr td {
+            padding: 7px 0px;
+            /* Atur ruang sel dalam tabel */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0px !important;
+            margin: 0px !important;
+        }
+
+
+        .active {
+            background-color: var(--subMain) !important;
+            color: white !important;
+            border: none !important;
+            outline: none !important;
+        }
+
+        .reguler-button,
+        .transfer-button,
+        .masaaktif-button,.reguler-button:hover,.transfer-button:hover {
+            background: #fff;
+            color: black;
+            font-size: 3vw;
+            border-radius: 15px;
+            border: none;
+            margin-bottom: 15px;
+            outline: none;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .product-item {
+            background: white;
+            padding: 15px;
+            padding-bottom: 40px !important;
+            border-radius: 15px;
+            width: 100%;
+            position: relative;
+            display: flex;
+        }
+
+        .name-product,
+        .name-price {
+            color: #181818 !important;
+            border: none;
+        }
+
+        .name-product {
+            font-weight: bold;
+            font-size: 13px;
+            margin: 0px;
+            width: 100%;
+        }
+
+        .name-price {
+            font-size: 12px;
+            font-weight: 500;
+            color: white !important;
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            margin: 0px !important;
+            background: var(--subMain);
+            padding-right: 15px;
+            padding-left: 15px;
+            border-radius: 12px 0px 12px 0px;
+        }
+
+        p,
+        h2,
+        h5 {
+            color: black !important;
+        }
+
+        .fix-head {
+            background: var(--subMain);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: 1;
+            border-radius: 0px 0px 50% 50%;
+        }
+
+        .pad {
+            position: relative;
+
+            top: 0;
+            z-index: 11;
+            padding: 10px;
+        }
+
+        .input-pack {
+            background: white;
+            padding: 14px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .img--produk {
+            width: 30px;
+            margin-left: 8px;
+            border-radius: 12px;
+            margin-right: 0px !important;
+        }
+
+        .name-diskon {
+            display: none;
+        }
+
+        #inputNumber {
+            position: relative;
+            z-index: 10;
+            background: white !important;
+        }
+
+        .btn--form {
+            background: #f1f4f8;
+            border-radius: 0px 0px 15px 15px;
+            padding-top: 15px;
+            padding-bottom: 10px;
+            position: relative;
+            top: -5px;
+            z-index: 1;
+        }
+
+        .btn--form a {
+            font-size: 12px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn--form a:hover {
+            text-decoration: none;
+        }
+
+        .btn--form a img {
+            width: 15px;
+            margin-right: 5px;
+        }
+
+        #d--fish {
+            text-align: center;
+        }
+
+        #d--fish img {
+            margin-top: 10%;
+            width: 50% !important;
+        }
+
+        #d--fish p {
+            font-size: 13px;
+        }
+
+        .saved-number-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 5px;
+            padding-top: 8px;
+            font-size: 13px;
+        }
+
+        .checkbox {
+            margin-left: 10px;
+            /* Adjust the margin as needed */
+        }
+
+        .card-body {
+            border: none;
+            overflow-y: scroll;
+            height: 100px;
+            margin-top: 5px;
+            padding: 0;
+            position: relative;
+            background: #f1f4f8;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .delete--list {
+            background: red;
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            border: none;
+            margin-left: 10px;
+        }
+        #toggleMoodButton,
+    #toggleMoodButton:hover {
+      background: transparent;
+      border: none !important;
+      box-shadow: none !important;
+      outline: none;
+      padding: 0px;
+      position: absolute;
+      right: 17px;
+      top: 10px;
+    }
+
+    #toggleMoodButton img {
+      width: 25px;
+    }
+    .input-pack {
+        position: relative;
+    }
+    .scroll-indicator {
+    font-size: 10px;
+    color: gray;
+  }
+  #loadingSpinner {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
+
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 4px solid #3498db;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    </style>
+
+</head>
+
+<body>
+    <div class="fix-head"></div>
+    <div class="pad">
+        <div class="input-pack shadows">
+            <label for="inputNumber">
+                Pulsa All Operator
+            </label>
+            <br />
+            <div class="d-flex align-items-center">
+                <input type="tel" id="inputNumber" class="w-100 {{hasil_kontak}} {{hasil_scan}}" name="catatan"
+                    placeholder="Masukkan nomor telepon disini" />
+            </div>
+            <div class="d-flex align-items-center btn--form">
+                <a href="https://kobodev.my.id/ambil_kontak" class="w-100 text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/128/13965/13965328.png" alt=""> Kontak
+                </a>
+                <a href="https://kobodev.my.id/scan_all" class="w-100 text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/128/7463/7463734.png" alt=""> Scan
+                </a>
+                <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                    aria-controls="collapseExample" class="w-100 text-center" onclick="saveToFavorite()">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt=""> Favorite
+                </a>
+            </div>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <div class="scroll-indicator">Gulir untuk melihat lebih banyak</div>
+                    <div class="saved-numbers">
+                        <div class="d-flex">
+                            <ul id="savedNumbersList" class="w-100">
+                                Belum ada data..
+                            </ul>
+                            <div>
+                                <button class="delete--list" onclick="deleteSelected()">Hapus</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+   <!-- GRID AND LIST MODE BUTTON -->
+   <button id="toggleMoodButton" class="btn btn-primary">
+    <img src="https://cdn-icons-png.flaticon.com/128/8917/8917404.png" alt="" id="iconMood1">
+    <img src="https://cdn-icons-png.flaticon.com/128/507/507205.png" alt="" id="iconMood2" style="display:none;">
+  </button>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="group-button mt-1">
+            <button class="reguler-button active shadows" onclick="toggleButton(this)">Reguler</button>
+            <div style="width: 15px;"></div>
+            <button class="transfer-button shadows" onclick="toggleButton(this)">Transfer</button>
+            <div style="width: 15px;display: none;"></div>
+            <button class="masaaktif-button shadows d-none" onclick="toggleButton(this)">Masa Aktif</button>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div id="produk-list-container">
+            <div id="loadingSpinner">
+                <div class="spinner"></div>
+            </div>
+            <div id="d--fish">
+                <img src="https://i.ibb.co/R3n0187/undraw-Note-list-re-r4u9-2.png" alt="" style="width:100%">
+                <p>Masukan Nomor Hp</p>
+            </div>
+            <ul id="produk-list" class="mood2">
+
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="logoModal1Label"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Detail Produk</h5>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="modal-label">No Tujuan :</td>
+                                <td class="modal-value text-right" id="nomorTujuanModal"></td>
+                            </tr>
+                            <tr class="d-none">
+                                <td class="modal-label">Nama:</td>
+                                <td class="modal-value text-right" id="">Belum tersedia</td>
+                            </tr>
+                            <tr>
+                                <td class="modal-label">Produk:</td>
+                                <td class="modal-value text-right" id="productNameModal"></td>
+                            </tr>
+                            <tr>
+                                <td class="modal-label">Harga:</td>
+                                <td class="modal-value text-right" id="productPriceModal"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" id="deskripsiPanjangModal"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex align-items-center">
+                        <a class="btn btn-no custom-button text-white" data-dismiss="modal">Kembali</a>
+                        <div style="width: 15px;"></div>
+                        <a id="link-beli" href="#" class="btn btn-yes custom-button">Proses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br />
+    <script>
+        function toggleButton(button) {
+            document.querySelectorAll('button').forEach(function (btn) {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+    </script>
+<script>
+
+    $('#productModal').on('show.bs.modal', function (e) {
+        var descriptionContainer = document.getElementById("deskripsiPanjangModal");
+        descriptionContainer.innerHTML = descriptionContainer.innerText;
+    });
+    var OpenApi_Kobodeveloper = "eyJhcHAiOiIxNDIzODIiLCJhdXRoIjoiMjAyMzA5MjQiLCJzaWduIjoiQ1lvXC9nTXhmTVVjSmFrc2ViTTRSNEE9PSJ9";
+    var activeCategoryColor = "";
+    var previousNomorPemanggil = ""; document.addEventListener("DOMContentLoaded", function () {
+        const kategoriUrls = [
+            {
+                "Idkategori1": "545798",
+                "Idkategori2": "336447",
+                "propaider": "Byu",
+                "nomorpemanggil": ["0851"]
+            },
+            {
+                "Idkategori1": "529294",
+                "Idkategori2": "336447",
+                "propaider": "Telkomsel",
+                "nomorpemanggil": ["0811", "0812", "0813", "0821", "0822", "0852", "0853", "0823", "0835"]
+            },
+            {
+                "Idkategori1": "529222",
+                "Idkategori2": "419992",
+                "propaider": "Tri",
+                "nomorpemanggil": ["0895", "0896", "0897", "0898", "0899"]
+            },
+            {
+                "Idkategori1": "529248",
+                "Idkategori2": "419978",
+                "propaider": "Axis ",
+                "nomorpemanggil": ["0838", "0831", "0832", "0833"]
+            },
+            {
+                "Idkategori1": "529287",
+                "Idkategori2": "419988",
+                "propaider": "Indosat",
+                "nomorpemanggil": ["0814", "0815", "0816", "0855", "0856", "0857", "0858"]
+            },
+            {
+                "Idkategori1": "529114",
+                "Idkategori2": "419959",
+                "propaider": "Xl axiata",
+                "nomorpemanggil": ["0818", "0817", "0819", "0859", "0877", "0878"]
+            },
+            {
+                "Idkategori1": "529289",
+                "Idkategori2": "123",
+                "propaider": "Smartfren",
+                "nomorpemanggil": ["0881", "0882", "0883", "0884", "0885", "0886", "0887", "0888", "0889"]
+            },
+        ];
+
+        var produkList = document.getElementById("produk-list");
+        var inputNumber = document.getElementById("inputNumber");
+        var regulerButton = document.querySelector('.reguler-button');
+        var transferButton = document.querySelector('.transfer-button');
+        var activeCategory;
+        var productsLoaded = false;
+
+        function getCategoryByNomorPemanggil(nomorPemanggil) {
+            return kategoriUrls.find(category => category.nomorpemanggil.includes(nomorPemanggil));
+        }
+        function displayProducts(products) {
+                if (products.length > 0) {
+                    products.forEach(function (product) {
+
+                        var productItem = document.createElement("li");
+                        productItem.className = "product-item shadows animate__animated animate__flipInX d-flex align-items-center";
+                        productItem.setAttribute("data-harga", product.harga_produk);
+
+
+                        
+                        var productName = document.createElement("h2");
+                        productName.textContent = product.nama_produk;
+                        productName.className = "name-product";
+
+                        var productDekssingkat = document.createElement("h2");
+                        productDekssingkat.textContent = product.deskripsi_singkat;
+                        productDekssingkat.className = "deskripsi-singkat";
+
+                        var productDiskon = document.createElement("h2");
+                        productDiskon.textContent = product.harga_produk_asli;
+                        productDiskon.className = "name-diskon";
+
+                        var productImg = document.createElement("img");
+                        productImg.src = product.url_gambar_produk;
+                        productImg.alt = product.nama_produk;
+                        productImg.className = "img--produk";
+
+                        var formattedPrice = parseFloat(product.harga_produk).toLocaleString('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR'
+                        });
+
+                        var productPrice = document.createElement("p");
+                        productPrice.textContent = formattedPrice.replace(/,00$/, "");
+                        productPrice.className = "name-price";
+
+                        var categoryInfo = document.createElement("p");
+                        categoryInfo.className = "name-price";
+
+
+                        productItem.setAttribute("data-toggle", "modal");
+                        productItem.setAttribute("data-target", "#productModal");
+                        var bayar = document.getElementById('link-beli');
+                        productItem.addEventListener("click", function () {
+                            document.getElementById("productNameModal").textContent = "" + product.nama_produk;
+                            document.getElementById("productPriceModal").textContent = "" + formattedPrice;
+
+                            var descriptionContainer = document.getElementById("deskripsiPanjangModal");
+                            descriptionContainer.textContent = "";
+
+                            var wrapperDiv = document.createElement('div');
+                            wrapperDiv.innerHTML = product.deskripsi_panjang;
+
+                            wrapperDiv.childNodes.forEach(function (node) {
+                                descriptionContainer.appendChild(node.cloneNode(true));
+                            });
+                            var nomorTujuan = inputNumber.value;
+                            var urlProduk = product.url_produk + "?catatan=" + encodeURIComponent(nomorTujuan);
+                            bayar.href = urlProduk;
+                        });
+
+                        productItem.appendChild(productName);
+                        
+                        productItem.appendChild(productImg);
+                        productItem.appendChild(productDiskon);
+                        productItem.appendChild(productPrice);
+                        productItem.appendChild(categoryInfo);
+                        produkList.appendChild(productItem);
+                    });
+                }
+            }
+            var loadingSpinner = document.getElementById('loadingSpinner');
+
+function getCachedData(key) {
+            const cachedData = localStorage.getItem(key);
+            if (cachedData) {
+                return JSON.parse(cachedData);
+            }
+            return null;
+        }
+        function setCachedData(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+        function showLoadingSpinner() {
+            loadingSpinner.style.display = 'block';
+        }
+        function hideLoadingSpinner() {
+            loadingSpinner.style.display = 'none';
+        }
+function fetchProductsByPage(page) {
+    showLoadingSpinner(); 
+
+    if (activeCategory) {
+        var apiUrl = "https://openapi.bukaolshop.net/v1/app/produk?token=" + OpenApi_Kobodeveloper + "&page=" + page + "&id_kategori=" + activeCategory;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayProducts(data.data);
+                sortAndDisplayProducts(true);
+                hideLoadingSpinner(); 
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                hideLoadingSpinner(); 
+            });
+    }
+}
+function sortAndDisplayProducts(ascending) {
+if (productsLoaded) {
+    var productList = Array.from(document.querySelectorAll('.product-item'));
+    productList.sort(function (a, b) {
+        var priceA = parseFloat(a.getAttribute('data-harga'));
+        var priceB = parseFloat(b.getAttribute('data-harga'));
+        return ascending ? priceA - priceB : priceB - priceA;
+    });
+    produkList.innerHTML = "";
+
+    productList.forEach(function (productItem) {
+        produkList.appendChild(productItem);
+    });
+}
+}
+function sortProductsOnLoad() {
+    sortAndDisplayProducts(true);
+    }
+        function handleInput() {
+            var nomorTujuan = inputNumber.value.trim();
+            var buttonGroup = document.querySelector('.group-button');
+
+            if (nomorTujuan === '') {
+                buttonGroup.style.display = 'none';
+                document.getElementById('d--fish').style.display = 'block';
+            } else {
+                buttonGroup.style.display = 'flex';
+                document.getElementById('d--fish').style.display = 'none'; 
+            }
+
+            var nomorPemanggil = inputNumber.value.slice(0, 4);
+            if (nomorPemanggil.length === 4) {
+                var selectedCategory = getCategoryByNomorPemanggil(nomorPemanggil);
+                if (selectedCategory) {
+                    var newCategory = transferButton.classList.contains('active') ? selectedCategory.Idkategori2 : selectedCategory.Idkategori1;
+
+                    if (newCategory !== activeCategory) {
+                        produkList.innerHTML = "";
+                        productsLoaded = false;
+                    }
+
+                    activeCategory = newCategory;
+                    activeCategoryColor = selectedCategory.Warna;
+
+                    if (!productsLoaded) {
+                        for (let page = 1; page <= 5; page++) {
+                            fetchProductsByPage(page);
+                        }
+
+                        productsLoaded = true;
+                    }
+                    var label = document.querySelector('label[for="inputNumber"]');
+                    label.innerHTML = `${selectedCategory.propaider}`;
+                    label.style.background = selectedCategory.Warna;
+                } else {
+                    productsLoaded = false;
+                    produkList.innerHTML = "Masukan Nomor Hp";
+                }
+            } else {
+                productsLoaded = false;
+                produkList.innerHTML = "";
+            }
+            updateLabelColor();
+          
+        }
+        function updateLabelColor() {
+            var label = document.querySelector('label[for="inputNumber"]');
+            if (activeCategoryColor) {
+                label.style.backgroundColor = activeCategoryColor;
+            } else {
+                label.style.backgroundColor = "";
+            }
+        }
+
+
+        function loadIdkategori1(nomorPemanggil) {
+            var selectedCategory = getCategoryByNomorPemanggil(nomorPemanggil);
+            if (selectedCategory) {
+                activeCategory = selectedCategory.Idkategori1;
+                activeCategoryColor = selectedCategory.Warna;
+                produkList.innerHTML = "";
+                productsLoaded = false;
+
+                for (let page = 1; page <= 5; page++) {
+                    fetchProductsByPage(page);
+                }
+
+                productsLoaded = true;
+                handleInput();
+
+            }
+        }
+        var selectedCategory;
+        var previousNomorPemanggil = "";
+        inputNumber.addEventListener("input", function () {
+            var currentNomorPemanggil = inputNumber.value.slice(0, 4);
+
+            if (currentNomorPemanggil !== previousNomorPemanggil) {
+
+                if (currentNomorPemanggil.length === 4) {
+                    loadIdkategori1(currentNomorPemanggil);
+                } else {
+                    productsLoaded = false;
+                    produkList.innerHTML = "";
+                }
+                updateLabelColor();
+                var label = document.querySelector('label[for="inputNumber"]');
+                if (currentNomorPemanggil.length === 4 && selectedCategory) {
+                    label.innerHTML = ` (${selectedCategory.propaider})`;
+                    label.style.background = selectedCategory.Warna;
+                } else {
+                    label.innerHTML = 'Pulsa All Operator';
+                    label.style.background = '';
+                }
+
+                previousNomorPemanggil = currentNomorPemanggil;
+            }
+        });
+
+
+        $('#inputNumber').on('change', function () {
+            var no = $(this).val()
+            var newno = no.replace('-', '').trim()
+            var cek = newno.substring(0, 3).replace('-', '').trim()
+            var ceka = newno.substring(3, 16).replace('-', '').trim()
+
+            if (cek == '+62') {
+                let result = 0
+                $(this).val(result + ceka)
+                getNmr(result + ceka)
+            } else {
+                $(this).val(cek + ceka)
+                getNmr(cek + ceka);
+            }
+        });
+
+        function getNmr(nomor) {
+            console.log("Nomor Telepon yang Dipilih: " + nomor);
+            $('#hasil_kontak').val(nomor);
+            $('#nomorTujuanModal').text(nomor);
+            handleInput();
+        }
+
+        inputNumber.addEventListener("input", function () {
+            nomorTujuanModal.textContent = inputNumber.value;
+
+            handleInput();
+        });
+
+        regulerButton.addEventListener("click", function () {
+            regulerButton.classList.add('active');
+            transferButton.classList.remove('active');
+            handleInput();
+        });
+
+        transferButton.addEventListener("click", function () {
+            transferButton.classList.add('active');
+            regulerButton.classList.remove('active');
+            handleInput();
+        });
+        inputNumber.addEventListener("input", function () {
+            handleInput();
+        });
+
+        handleInput();
+    });
+    $('.ambil_kontak').on('click', function (event) {
+        event.preventDefault();
+        console.log("Elemen Ambil Kontak diklik");
+        window.location.href = $(this).attr('href');
+    });
+</script>
+
+<script>
+    function saveToFavorite() {
+        var phoneNumberInput = document.getElementById('inputNumber');
+        var phoneNumber = phoneNumberInput.value;
+
+        if (phoneNumber.trim() !== "") {
+            var savedNumbers = JSON.parse(localStorage.getItem('savedNumbers')) || [];
+            if (!savedNumbers.includes(phoneNumber)) {
+                savedNumbers.push(phoneNumber);
+                localStorage.setItem('savedNumbers', JSON.stringify(savedNumbers));
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Nomor Tersimpan!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                displaySavedNumbers();
+                phoneNumberInput.value = "";
+            } else {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Nomor Sudah ada!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+    }
+    function displaySavedNumbers() {
+        var savedNumbersList = document.getElementById('savedNumbersList');
+        savedNumbersList.innerHTML = "";
+        var savedNumbers = JSON.parse(localStorage.getItem('savedNumbers')) || [];
+        if (savedNumbers.length === 0) {
+            var infoMessage = document.createElement('p');
+            infoMessage.textContent = 'Belum ada nomor tersimpan.';
+            savedNumbersList.appendChild(infoMessage);
+        } else {
+            savedNumbers.forEach(function (number) {
+                var listItem = document.createElement('li');
+                listItem.textContent = number;
+                listItem.classList.add('saved-number-item');
+                var checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.value = number;
+                checkbox.classList.add('checkbox');
+                checkbox.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+                listItem.appendChild(checkbox);
+                listItem.addEventListener('click', function () {
+                    copyToClipboard(number);
+                });
+                savedNumbersList.appendChild(listItem);
+            });
+        }
+    }
+    function copyToClipboard(text) {
+        var textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        Swal.fire({
+            icon: 'success',
+            title: 'Nomor Disalin!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+    function deleteSelected() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        var savedNumbers = JSON.parse(localStorage.getItem('savedNumbers')) || [];
+
+        if (checkboxes.length > 0) {
+            Swal.fire({
+                title: 'Konfirmasi Penghapusan',
+                text: 'Anda yakin ingin menghapus nomor terpilih?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    checkboxes.forEach(function (checkbox) {
+                        var value = checkbox.value;
+                        savedNumbers = savedNumbers.filter(function (number) {
+                            return number !== value;
+                        });
+                    });
+                    localStorage.setItem('savedNumbers', JSON.stringify(savedNumbers));
+                    displaySavedNumbers();
+
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Nomor Terpilih dihapus',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'info',
+                text: 'Pilih nomor untuk dihapus',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    }
+    displaySavedNumbers();
+</script>
+<script>
+function toggleMood() {
+  var productList1 = document.getElementById("produk-list");
+  var iconMood1 = document.getElementById("iconMood1");
+  var iconMood2 = document.getElementById("iconMood2");
+  if (productList1.classList.contains("mood1")) {
+    productList1.classList.remove("mood1");
+    productList1.classList.add("mood2");
+  } else {
+    productList1.classList.remove("mood2");
+    productList1.classList.add("mood1");
+  }
+  if (iconMood1.style.display === "none") {
+    iconMood1.style.display = "inline-block";
+    iconMood2.style.display = "none";
+  } else {
+    iconMood1.style.display = "none";
+    iconMood2.style.display = "inline-block";
+  }
+  var currentMood = productList1.classList.contains("mood1") ? "mood1" : "mood2";
+  localStorage.setItem("currentMood", currentMood);
+}
+document.getElementById("toggleMoodButton").addEventListener("click", toggleMood);
+document.addEventListener("DOMContentLoaded", function () {
+  var savedMood = localStorage.getItem("currentMood");
+  if (savedMood === "mood1") {
+    toggleMood();
+  }
+});
+</script>
+</body>
+
+</html>
