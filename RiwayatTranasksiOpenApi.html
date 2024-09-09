@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Informasi Pengguna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+        :root {
+            --main: #ffffff;
+            --subMain: #6495ED;
+            --subColor: #08e900;
+            --cancel: #f00000;
+            --white: #ffffff;
+            --tabs: #4e4e4e;
+            --borderColor: #636363;
+            --animate-duration: 800ms;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--main);
+            user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            padding: 0;
+            margin: 0;
+            animation: fade-in 2s linear;
+        }
+
+        .item--transaction {
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            position: relative;
+        }
+
+        .item--transaction img {
+            width: 35px;
+            margin-right: 10px;
+            border-radius: 10px;
+        }
+
+        .item--transaction p {
+            margin: 0;
+            font-size: 11px;
+        }
+
+        .name--item {
+            font-size: 12px !important;
+            font-weight: bold;
+        }
+
+        .floats {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .floats2 {
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            font-size: 10px !important;
+            font-weight: 500;
+        }
+
+        .status-gagal {
+            color: white;
+            background: red;
+            border-radius: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 2px;
+            padding-top: 2px;
+            font-size: 10px !important;
+            font-weight: bold;
+        }
+
+        a,
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
+
+        .status-lainnya {
+            color: green;
+            /* warna untuk status selain 'Gagal' */
+        }
+
+        .sticky-top {
+            background-color: var(--subMain);
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sticky-top p {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            border-radius: 10px;
+            padding: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: black;
+            outline: none;
+            border: none;
+        }
+        .trx--failed,.trx--success {
+            display: flex;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        .trx--failed img,.trx--success img{
+            width: 20px;
+            margin-right: 10px;
+        }
+        .trx--failed p ,.trx--success p{
+            font-size: 11px;
+            margin: 0;
+        }
+        .trx--failed h5,.trx--success h5{
+            margin: 0;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .failed{
+            color: red;
+            font-weight: bold;
+        }
+        .pending{
+            color: green;
+            font-weight: bold;
+        }
+        .success{
+            color: var(--subMain);
+            font-weight: bold;
+        }
+        .status-pending {
+        color: white;
+        background: gray; /* Ganti warna latar belakang sesuai keinginan */
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 2px;
+        padding-top: 2px;
+        font-size: 10px !important;
+        font-weight: bold;
+    }
+    .status-sukses {
+        color: white;
+        background: var(--subMain); /* Ganti warna latar belakang sesuai keinginan */
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 2px;
+        padding-top: 2px;
+        font-size: 10px !important;
+        font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sticky-top top-0">
+        <p>Daftar Transaksi</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cari nama barang...">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="d-flex align-item-center w-100">
+            <div class="trx--failed">
+                <div>
+                    <p class="failed">Gagal</p>
+                    <h5 id="total_transaksi_gagal">0</h5>
+                </div>
+            </div>
+            <div style="margin-right: 10px;"></div>
+            <div class="trx--failed">
+                <div>
+                    <p class="pending">Pending</p>
+                    <h5 id="total_transaksi_pending">0</h5>
+                </div>
+            </div>
+            <div style="margin-right: 10px;"></div>
+            <div class="trx--success">
+                <div>
+                    <p class="success">Sukses</p>
+                    <h5 id="total_transaksi_sukses">0</h5>
+                </div>
+            </div>
+        </div>
+        <div id="transaksi_list"></div>
+    </div>
+    <script>
+        var token = "TOKENAPI";
+        var token_user = "{{token_user}}";
+        var id_user = "{{id_user}}";
+    
+        var total_transaksi_gagal = 0;
+        var total_transaksi_pending = 0;
+        var total_transaksi_sukses = 0;
+    
+        var transactionXmlHttpRequest = new XMLHttpRequest();
+        transactionXmlHttpRequest.open("GET", "https://openapi.bukaolshop.net/v1/user/transaksi?token=" + token + "&token_user=" + token_user + "&id_user=" + id_user, true);
+        transactionXmlHttpRequest.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var transactionResponse = JSON.parse(this.responseText);
+    
+                if (transactionResponse.code === 200 && transactionResponse.status === "ok" && transactionResponse.data) {
+                    var transactions = transactionResponse.data;
+                    var transactionListHtml = '';
+    
+                    for (var i = 0; i < transactions.length; i++) {
+                        var transaction = transactions[i];
+                        transactionListHtml += '<div class="transaction-link">';
+                        transactionListHtml += '<a href="' + transaction.link_transaksi + '" target="_blank">';
+                        transactionListHtml += '<div style="display:flex;" class="item--transaction">';
+                        transactionListHtml += '<div>';
+                        transactionListHtml += '<img src="' + transaction.url_gambar_produk + '" alt="Gambar Produk">';
+                        transactionListHtml += '</div>';
+                        transactionListHtml += '<div>';
+                        transactionListHtml += '<p class="name--item">' + transaction.nama_barang + '</p>';
+                        transactionListHtml += '<p>#' + transaction.nomor_pembayaran + '</p>';
+                        var statusBayarText = (transaction.status_bayar === "di batalkan") ? "Saldo Dikembalikan" : transaction.status_bayar;
+                        transactionListHtml += '<p class="floats2">' + statusBayarText + '</p>';
+                        var status_pengirimanText = (transaction.status_pengiriman.toLowerCase() === "di batalkan") ? "Gagal" : transaction.status_pengiriman;
+                        var status_pengirimanClass = (status_pengirimanText.toLowerCase() === "gagal") ? "status-gagal" : "status-lainnya";
+    
+                        if (status_pengirimanText.toLowerCase() === "gagal") {
+                            total_transaksi_gagal++;
+                        }
+    
+                        if (status_pengirimanText.toLowerCase() === "pending" || status_pengirimanText.toLowerCase() === "belum diproses" || status_pengirimanText.toLowerCase() === "diproses") {
+                            total_transaksi_pending++;
+                            status_pengirimanText = "Pending";
+                            status_pengirimanClass = "status-pending";
+                        } else if (status_pengirimanText.toLowerCase() === "selesai") {
+                            status_pengirimanText = "Sukses";
+                            status_pengirimanClass = "status-sukses";
+                            total_transaksi_sukses++; // Update total transaksi yang sukses
+                        }
+    
+                        transactionListHtml += '<p class="' + status_pengirimanClass + ' floats">' + status_pengirimanText + '</p>';
+                        transactionListHtml += '<p>' + transaction.tanggal + '</p>';
+                        transactionListHtml += '</div>';
+                        transactionListHtml += '</div>';
+                        transactionListHtml += ' </a>';
+                    }
+    
+                    document.getElementById("transaksi_list").innerHTML = transactionListHtml;
+                    document.getElementById("total_transaksi_gagal").innerText = total_transaksi_gagal;
+                    document.getElementById("total_transaksi_pending").innerText = total_transaksi_pending;
+                    document.getElementById("total_transaksi_sukses").innerText = total_transaksi_sukses;
+                } else {
+                    console.error("Unexpected transaction response:", transactionResponse);
+                }
+            }
+        };
+        transactionXmlHttpRequest.send();
+    </script>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function () {
+            searchTransactions();
+        });
+
+        function searchTransactions() {
+            var input, filter, transactionList, transactions, transaction, transactionLink, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            transactionList = document.getElementById("transaksi_list");
+            transactions = transactionList.getElementsByClassName('transaction-link');
+
+            for (i = 0; i < transactions.length; i++) {
+                transaction = transactions[i];
+                transactionLink = transaction.querySelector('p:first-child');
+                txtValue = transactionLink.textContent || transactionLink.innerText;
+
+                if (filter === "" || txtValue.toUpperCase().indexOf(filter) > -1) {
+                    transaction.style.display = "";
+                } else {
+                    transaction.style.display = "none";
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function formatRupiah(angka) {
+            var reverse = angka.toString().split('').reverse().join(''),
+                ribuan = reverse.match(/\d{1,3}/g);
+            ribuan = ribuan.join('.').split('').reverse().join('');
+            return "Rp " + ribuan;
+        }
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+        charset="utf-8"></script>
+</body>
+
+</html>
